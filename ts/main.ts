@@ -15,7 +15,7 @@ for(let reelNo=0; reelNo<3; reelNo++){
 }
 
 //create reel to contain symbols - takes nodet as parameter
-function createReel(reel) { 
+function createReel(reel):void { 
     for (let index = 0; index < reelsetConfig.length; index++) {
         //create symbols
         const symbol = createElement(reelsetConfig[index],'block');
@@ -25,7 +25,7 @@ function createReel(reel) {
 
 //utility
 //Creates a node and returns it, takes id and class as strings - divs only for now
-function createElement(id, className){
+function createElement(id, className):Node{
         var element = document.createElement('div');
         element.id=id;
         element.className=className;
