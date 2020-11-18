@@ -1,0 +1,26 @@
+#symbol0{
+    background-image: url('../assets/3xBAR.png');
+}
+#symbol1{
+    background-image: url('../assets/BAR.png');
+}
+#symbol2{
+    background-image: url('../assets/2xBAR.png'); 
+}
+#symbol3{
+    background-image: url('../assets/7.png');
+}
+#symbol4{
+    background-image: url('../assets/Cherry.png');
+}
+
+.block{
+    height: 121px;
+    width: 141px;
+}
+
+.reel{
+    display: inline-block;
+    padding: 0 5px;
+    width: 141px;
+}
