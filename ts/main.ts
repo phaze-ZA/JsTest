@@ -1,6 +1,8 @@
-//test
-//create reels
-//spin reels
-let allReels:Array<Reel>  = createReels();
+var x = new LoadManager();
+let symbolMap=x.initGame();
 
-spinReels(allReels);
+let allReels:Array<Reel>  = createReels(symbolMap);
+
+SpinButton.press=()=> {
+    spinReels(allReels);
+}

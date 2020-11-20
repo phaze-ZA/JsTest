@@ -5,7 +5,7 @@
   "main": "main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"npx tsc --outfile ./build/main.js ./ts/reels.ts ./ts/main.ts  "
+    "build":"npx tsc --project ./"
   },
   "repository": {
     "type": "git",

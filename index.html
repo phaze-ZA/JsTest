@@ -7,7 +7,20 @@
     <title>SLOT GAME</title>
 </head>
 <body>
-    <canvas id="mainCanvas" width="500" height="500"></canvas>
+    <div id="gameContainer">
+        <header class="gameHeader">
+            <!--Paytable goes here-->
+        </header>
+        <div class="reelContainer">
+            <canvas id="reel0" class="reel" width="150" height="250"></canvas>
+            <canvas id="reel1" class="reel" width="150" height="250"></canvas>
+            <canvas id="reel2" class="reel" width="150" height="250"></canvas>
+        </div>
+        <footer class="gameFooter">
+            <button id="spinBtn" class="consoleBtn" onclick="SpinButton.press()"></button>
+            <!--Buttons go here-->
+        </footer>
+    </div>
 </body>
 <script src="./build/main.js"></script>
 </html>

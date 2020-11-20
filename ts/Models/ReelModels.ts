@@ -1,3 +1,5 @@
+//ReelModels.ts
+//ReelModels
 type TReelStates = "spinning" | "stopped";
 
 var reelsetConfig : Array<string> = [
@@ -17,16 +19,18 @@ class Reel {
     id: number;
     state: TReelStates;
     symbols: Array<string>;
+    symbolImages:Array<ReelSymbol>;
     topRowSymbol:string;
     activeSymbol:string;
     bottomRowSymbol:string;
-    constructor(id:number) {
+    constructor(id:number,reelSymbols:Array<ReelSymbol>) {
         this.id = id;
         this.state="stopped";
         this.symbols = reelsetConfig;
         this.topRowSymbol = this.symbols[0];
         this.activeSymbol = this.symbols[1];
         this.bottomRowSymbol = this.symbols[2];
+        this.symbolImages = reelSymbols;
     }
     spin(){
         this.state="spinning";

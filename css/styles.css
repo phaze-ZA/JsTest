@@ -1,30 +1,41 @@
-#symbol0{
-    background-image: url('../assets/3xBAR.png');
+#gameContainer{
+    width: 450px;
+    height: 550px;
+    border: black solid 1px;
+    box-sizing: border-box;
 }
 
-#symbol1{
-    background-image: url('../assets/BAR.png');
-}
-
-#symbol2{
-    background-image: url('../assets/2xBAR.png'); 
-}
-
-#symbol3{
-    background-image: url('../assets/7.png');
-}
-
-#symbol4{
-    background-image: url('../assets/Cherry.png');
-}
-
-.block{
-    height: 121px;
-    width: 141px;
+.gameHeader, .gameFooter{
+    position: relative;
+    width: 100%;
+    height: 150px;
 }
 
 .reel{
-    display: inline-block;
-    padding: 0 5px;
-    width: 141px;
+    position: absolute;
+}
+
+.reelContainer{
+    position: relative;
+    box-shadow: inset 0 0 6px black;
+    width: 100%;
+    height: 250px;
+    box-sizing: border-box;
+}
+#reel1{
+    left: 33%;
+    border: 1px solid black;
+    border-top: 0;
+    border-bottom: 0;
+    box-sizing: border-box;
+}
+#reel2{
+    left: 67%;
+}
+
+.consoleBtn{
+    width: 150px;
+    height: 50px;
+    left: 33%;
+    position: absolute;
 }
