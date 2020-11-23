@@ -17,6 +17,20 @@ body{
     position: absolute;
 }
 
+#gameContainer,#debugArea{
+    width: 50%;
+    height: 100%;
+    background-color: #0c0c0c;
+    position: absolute;
+    left: 0;
+}
+
+#debugArea{
+    left: unset;
+    right: 0;
+    background-color: #000
+}
+
 .payoutSection,.payouts{
     width: 100%;
 }
