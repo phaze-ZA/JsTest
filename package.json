@@ -2,7 +2,7 @@
   "name": "slot-machine",
   "version": "1.0.0",
   "description": "Slot machine simulation made with Typescript for Derivco Estonia",
-  "private":"true",
+  "private": "true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsbuild": "npx tsc --project ./",

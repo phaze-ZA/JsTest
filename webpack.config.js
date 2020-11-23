@@ -20,31 +20,38 @@ module.exports = {
         ]
     })
   ],
-   module: {
-     rules: [
-       {
-         test: /\.js$/,
-         exclude: /node_modules/
-       },
-       {
-         test: /\.(gltf)$/,
-         use: [
-           {
-             loader: "gltf-webpack-loader"
-           }
-         ]
-       },
-       {
-         test: [/\.(bin)$/, /\.(jpg)$/, /\.(png)$/],
-         use: [
-           {
-             loader: 'file-loader',
-             options: {
-               name: '[name]-[hash].[ext]'
-             }
-           }
-         ]
-       }
-     ]
-   },
+  devServer: {
+    onListening: function(server) {
+      const port = server.listeningApp.address().port;
+      console.log('Listening on port:', port);
+    },
+    open:true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(gltf)$/,
+        use: [
+          {
+            loader: "gltf-webpack-loader"
+          }
+        ]
+      },
+      {
+        test: [/\.(bin)$/, /\.(jpg)$/, /\.(png)$/],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name]-[hash].[ext]'
+            }
+          }
+        ]
+      }
+    ]
+  },
 };
