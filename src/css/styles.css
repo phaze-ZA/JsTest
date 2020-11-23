@@ -1,0 +1,92 @@
+:root{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5vh;
+    padding: 0;
+    margin: 0;
+    color:#FFF;
+}
+
+body{
+    margin: 0;
+}
+
+#gameContainer{
+    width: 100%;
+    height: 100%;
+    background-color: #0c0c0c;
+    position: absolute;
+}
+
+.payoutSection,.payouts{
+    width: 100%;
+}
+
+.gameHeader, .gameFooter{
+    position: relative;
+    width: 100%;
+    height: 33%;
+}
+
+.gameFooter{
+    height: 10%;
+
+}
+
+#reelContainer{
+    position: relative;
+    width: 100%;
+    height: 50%;
+}
+
+#reelContainer canvas{
+    left: 12.5%;
+}
+
+/* Console Section*/
+
+.consoleBtn{
+    box-sizing: border-box;
+    width: 25%;
+    height: 50px;
+    position: absolute;
+    border-radius: 0;
+    border: black 1px solid;
+}
+
+#spinBtn{
+    right: 0;
+    background-color: blue;
+}
+
+#spinBtn:focus{
+    outline: none;
+}
+
+#spinBtn:active{
+    background-color: cornflowerblue;
+}
+
+#balanceBox{
+    left: 0;
+}
+
+#betBox{
+    left: 25%;
+}
+#winBox{
+    left: 50%;
+}
+
+.header,.txtVal{
+    width: 100%;
+    height: 50%;
+    position: absolute;
+}
+
+.header{
+    top:0;
+}
+
+.txtVal{
+    bottom: 0;
+}

@@ -1,17 +1,8 @@
 {
-    "compileOnSave": true,
     "compilerOptions": {
-        "module": "system",
+        "module": "es6",
         "target": "es6",
-        "sourceMap": true,
-        "outFile": "build/main.js"
-    },
-    "files": [
-        "./ts/LoadManager.ts",
-        "./ts/Models/ReelModels.ts",
-        "./ts/Models/ConsoleModels.ts",
-        "./ts/console.ts",
-        "./ts/reels.ts",
-        "./ts/main.ts",
-    ]
+        "outDir": "./build",
+        "moduleResolution": "node",
+    }
 }
