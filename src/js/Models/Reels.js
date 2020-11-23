@@ -25,9 +25,11 @@ export default class Reel {
             mid: this.reelPosConfig[0],
             bot: this.reelPosConfig[2],
         };
-        this.topSymbol = this.reelPosConfig[this.reelPosConfig.length - 1];
-        this.middleSymbol = this.reelPosConfig[0];
-        this.bottomSymbol = this.reelPosConfig[1];
+        this.landing = {
+          top: this.reelPosConfig[this.reelPosConfig.length - 1],
+          mid: this.reelPosConfig[0],
+          bot: this.reelPosConfig[1],
+        };
         this.setSymbols();
     }
     mapSymbols() {
@@ -39,7 +41,7 @@ export default class Reel {
         return symbolMap;
     }
     setSymbols() {
-        if (this.middleSymbol === "empty") {
+        if (this.landing.mid === "empty") {
             this.symbolMap[this.display.top].y = this.possiblePositions.topRow;
             this.symbolMap[this.display.top].visible = true;
             this.symbolMap[this.display.bot].y = this.possiblePositions.bottomRow;
@@ -53,15 +55,36 @@ export default class Reel {
             this.symbolMap[this.display.bot].visible = true;
         }
     }
-    spin() {
-        let landingIdx = Math.floor(Math.random() * 9);
+    spin(pos,symbol) {
+        let landingIdx = 0;
         this.symbols.forEach((symbol) => {
             symbol.visible = false;
         });
+        if(pos && symbol){
+            if (pos === "top") {
+              landingIdx =
+                (((this.reelPosConfig.indexOf(symbol) + 1) %
+                  this.reelPosConfig.length) +
+                  this.reelPosConfig.length) %
+                this.reelPosConfig.length;
+            }
+            if (pos === "mid") {
+              landingIdx = this.reelPosConfig.indexOf(symbol);
+            }
+            if (pos === "bot") {
+              landingIdx = (((this.reelPosConfig.indexOf(symbol)-1) % this.reelPosConfig.length) +
+                this.reelPosConfig.length) %
+                this.reelPosConfig.length;
+            }
+            
+        }else
+        {
+            landingIdx = Math.floor(Math.random() * 9);
+        }
 
-        this.topSymbol = this.reelPosConfig[((landingIdx - 1) % this.reelPosConfig.length + this.reelPosConfig.length) % this.reelPosConfig.length];
-        this.display.top = this.topSymbol;
-        if (this.topSymbol === "empty") {
+        this.landing.top = this.reelPosConfig[((landingIdx - 1) % this.reelPosConfig.length + this.reelPosConfig.length) % this.reelPosConfig.length];
+        this.display.top = this.landing.top;
+        if (this.landing.top === "empty") {
             this.display.top = this.reelPosConfig[
                 (((landingIdx - 2) % this.reelPosConfig.length) +
                     this.reelPosConfig.length) %
@@ -69,12 +92,12 @@ export default class Reel {
             ];
         }
 
-        this.middleSymbol = this.reelPosConfig[landingIdx];
-        this.display.mid = this.middleSymbol;
+        this.landing.mid = this.reelPosConfig[landingIdx];
+        this.display.mid = this.landing.mid;
 
-        this.bottomSymbol = this.reelPosConfig[((landingIdx + 1) % this.reelPosConfig.length + this.reelPosConfig.length) % this.reelPosConfig.length];
-        this.display.bot = this.bottomSymbol;
-        if (this.bottomSymbol === "empty") {
+        this.landing.bot = this.reelPosConfig[((landingIdx + 1) % this.reelPosConfig.length + this.reelPosConfig.length) % this.reelPosConfig.length];
+        this.display.bot = this.landing.bot;
+        if (this.landing.bot === "empty") {
             this.display.bot = this.reelPosConfig[
                 (((landingIdx + 2) % this.reelPosConfig.length) +
                     this.reelPosConfig.length) %

@@ -121,12 +121,71 @@
                 </table>
             </div>
         </header>
-        <div id="reelContainer"></div>
+        <div id="reelContainer">
+            <div id="debugContainer">
+                <div id="fixed">
+                    <label for="fixedMode">Fixed Mode</label>
+                    <input type="checkbox" name="fixedMode" id="fixedMode">
+                </div>
+                <div class="debugReel">
+                    <span>REEL 1</span>
+                    <select name="reel0Symbol" disabled="true" id="reel0Symbol">
+                        <option value="symbol0">3xBAR</option>
+                        <option value="symbol1">BAR</option>
+                        <option value="symbol2">2xBAR</option>
+                        <option value="symbol3">SEVEN</option>
+                        <option value="symbol4">CHERRY</option>
+                    </select>
+                    
+                    <select name="reel0Pos" disabled="true" id="reel0Pos">
+                        <option value="top">TOP</option>
+                        <option value="mid">MIDDLE</option>
+                        <option value="bot">BOTTOM</option>
+                    </select>
+                </div>
+                <div class="debugReel">
+                    <span>REEL 2</span>
+                    <select name="reel1Symbol" disabled="true" id="reel1Symbol">
+                        <option value="symbol0">3xBAR</option>
+                        <option value="symbol1">BAR</option>
+                        <option value="symbol2">2xBAR</option>
+                        <option value="symbol3">SEVEN</option>
+                        <option value="symbol4">CHERRY</option>
+                    </select>
+                    
+                    <select name="reel1Pos" disabled="true" id="reel1Pos">
+                        <option value="top">TOP</option>
+                        <option value="mid">MIDDLE</option>
+                        <option value="bot">BOTTOM</option>
+                    </select>
+                </div>
+                <div class="debugReel">
+                    <span>REEL 3</span>
+                    <select name="reel2Symbol" disabled="true" id="reel2Symbol">
+                        <option value="symbol0">3xBAR</option>
+                        <option value="symbol1">BAR</option>
+                        <option value="symbol2">2xBAR</option>
+                        <option value="symbol3">SEVEN</option>
+                        <option value="symbol4">CHERRY</option>
+                    </select>
+                    
+                    <select name="reel2Pos" disabled="true" id="reel2Pos">
+                        <option value="top">TOP</option>
+                        <option value="mid">MIDDLE</option>
+                        <option value="bot">BOTTOM</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <footer class="gameFooter">
             <!--Buttons go here-->
+            <div id="debug">
+                <label for="debugMode">Debug Mode</label>
+                <input type="checkbox" name="debugMode" id="debugMode">
+            </div>
             <div id="balanceBox" class="consoleBtn">
                 <span id="balanceHdr" class="header">Balance</span>
-                <span id="balanceTxt" class="txtVal">5000</span>
+                <input id="balanceTxt" type="number" readonly="true" class="txtVal"/>
             </div>
             <div id="winBox" class="consoleBtn">
                 <span id="winHdr" class="header">Win</span>

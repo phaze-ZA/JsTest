@@ -125,10 +125,16 @@ export default class ReelContainer {
         return 0;
     }
 
-    static spinReels() {
-        ReelContainer.reels.forEach((reel) => {
-            reel.spin();
-        });
+    static spinReels(results) {
+        if(results){
+            ReelContainer.reels.forEach((reel) => {
+              reel.spin(results[reel.id].pos, results[reel.id].symbol);
+            });
+        }else{
+            ReelContainer.reels.forEach((reel) => {
+                reel.spin();
+            });
+        }
     }
 
     static stopReels() {
@@ -165,17 +171,19 @@ export default class ReelContainer {
         let botRow = [];
 
         ReelContainer.reels.forEach((reel) => {
-            topRow.push(reel.topSymbol);
-            midRow.push(reel.middleSymbol);
-            botRow.push(reel.bottomSymbol);
+            topRow.push(reel.landing.top);
+            midRow.push(reel.landing.mid);
+            botRow.push(reel.landing.bot);
         });
         let topWin = this.checkRowWin(topRow);
         let midWin = this.checkRowWin(midRow);
         let botWin = this.checkRowWin(botRow);
         if (topWin || midWin || botWin) {
             console.log("YOU WIN");
+            return true;
         } else {
             console.log("Sorry bud");
+            return false;
         }
     }
     // wait 3 seconds
