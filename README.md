@@ -18,7 +18,7 @@ I have made a video diary of my experience writing this app, this may supplement
 
 Session 1: https://youtu.be/2IWT4jdgjqo
 
-Session 2: https://youtu.be/grCyjd-IzQE
+Session 2: https://youtu.be/pB4cJI87pYI
 
 Session 3: https://youtu.be/grCyjd-IzQE
 
