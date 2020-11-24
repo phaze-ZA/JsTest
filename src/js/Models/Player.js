@@ -1,7 +1,7 @@
 class Player {
     constructor() {
         this._bet = 1;
-        this._balance = 10;
+        this._balance = 1000;
         this._spinDelay = 2000;
         this._debugger = false;
         this._fixedMode = false;

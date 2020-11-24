@@ -4,24 +4,19 @@ import { StageManager } from '../Models/Stage';
 export default class Canvas{
     static init(){
         Canvas.app = new PIXI.Application({
-            width: 500, 
-            height: 300,
+            width: StageManager.width,
+            height: StageManager.height,
         });
-        Canvas.app.renderer.view.style.position = "fixed";
-        Canvas.app.renderer.view.style.display = "block";
         Canvas.app.renderer.autoResize = true;
         Canvas.app.renderer.backgroundColor="0x0c0c0c";
+        StageManager.parentDiv.appendChild(Canvas.app.view);
         // window.addEventListener("resize",()=>{
-        //     Canvas.app.renderer.resize(window.innerWidth, window.innerHeight*0.5);
+        //     StageManager.width = StageManager.parentDiv.offsetWidth;
+        //     StageManager.height = StageManager.parentDiv.offsetHeight;
+        //     ReelContainer.resize();
+        //     Canvas.app.renderer.resize(StageManager.width, StageManager.height);
         // });
         StageManager.stage = Canvas.app.stage;
-        document.getElementById('reelContainer').appendChild(Canvas.app.view);
-        Canvas.app.renderer.backgroundColor="0xFFFFFF";
-        Canvas.animationFrame = {
-            reel0:"",
-            reel1:"",
-            reel2:"",
-        };
     }
 
     static loadImage(images,callback){
@@ -44,7 +39,7 @@ export default class Canvas{
         line.position.x = 0;
         line.position.y = yPos;
         line.moveTo(0,yPos);
-        line.lineTo(500,yPos);
+        line.lineTo(StageManager.width,yPos);
         return line;
     }
 
@@ -78,6 +73,6 @@ export default class Canvas{
     }
 
     static clearCanvas(){
-        Canvas.context.clearRect(0,0,Canvas.width,Canvas.height);
+        Canvas.context.clearRect(0, 0, StageManager.width, StageManager.height);
     }
 }

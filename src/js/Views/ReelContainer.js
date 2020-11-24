@@ -38,6 +38,7 @@ export default class ReelContainer {
             mid:76,
             bot:114,
         };
+        ReelContainer.backGround = '';
         /*winMap = {
             reel0:{
                 reel1a:{
@@ -363,10 +364,13 @@ export default class ReelContainer {
             "./assets/Cherry.png",
         ];
         Canvas.loadImage(bg, () => {
-            let bgSprite = Canvas.addSprite(bg,StageManager.bgSprite);
-            Canvas.stageSprite(bgSprite, StageManager.stage);
-            bgSprite.width = Canvas.app.renderer.view.width;
-            bgSprite.height = Canvas.app.renderer.view.height;
+            ReelContainer.backGround = Canvas.addSprite(
+                bg,
+                StageManager.bgSprite
+            );
+            Canvas.stageSprite(ReelContainer.backGround, StageManager.stage);
+            ReelContainer.backGround.width = StageManager.width;
+            ReelContainer.backGround.height = StageManager.height;
             Canvas.loadImage(assets, ReelContainer.createReels);
         });
         return obj;
