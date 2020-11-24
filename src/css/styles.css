@@ -17,20 +17,6 @@ body{
     position: absolute;
 }
 
-#gameContainer,#debugArea{
-    width: 50%;
-    height: 100%;
-    background-color: #0c0c0c;
-    position: absolute;
-    left: 0;
-}
-
-#debugArea{
-    left: unset;
-    right: 0;
-    background-color: #000
-}
-
 .payoutSection,.payouts{
     width: 100%;
 }
@@ -48,11 +34,13 @@ body{
 
 #reelContainer,#debugContainer{
     position: relative;
-    width: 50%;
+    width: 100%;
     height: 50%;
 }
 
 #reelContainer canvas{
+    display: block;
+    position: fixed;
     left: 12.5%;
 }
 

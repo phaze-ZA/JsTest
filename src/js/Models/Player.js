@@ -2,7 +2,7 @@ class Player {
     constructor() {
         this._bet = 1;
         this._balance = 10;
-        this._spinDelay = 1000;
+        this._spinDelay = 2000;
         this._debugger = false;
         this._fixedMode = false;
     }
@@ -10,7 +10,23 @@ class Player {
         return this._balance;
     }
     set balance(value) {
-        this._balance = value > 0 ? (value < 5000 ? value : 5000) : 0;
+        if(value>0 && !this.debugger){
+            if(value<5000){
+                this._balance = value;
+            }else{
+                this._balance = 5000; 
+            }
+        }else{
+            if(this.debugger&&value<1){
+                this._balance=1;
+            }else{
+                if(this.debugger){
+                    this._balance=value;
+                }else{
+                    this._balance=0;
+                }
+            }
+        }
     }
     get bet() {
         return this._bet;

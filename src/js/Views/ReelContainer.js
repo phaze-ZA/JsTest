@@ -1,9 +1,11 @@
 import Canvas from "./Canvas";
 import Reel from "../Models/Reels";
+import {StageManager} from '../Models/Stage';
 
 export default class ReelContainer {
     static init() {
         ReelContainer.reels = [];
+        ReelContainer.winLines = [];
         ReelContainer.symbolMap = ReelContainer.loadAssets();
         ReelContainer.reelConfig = {
             reel0: {
@@ -12,6 +14,7 @@ export default class ReelContainer {
                     yStart: 10,
                 },
                 sprites: [],
+                animation:0,
             },
             reel1: {
                 drawing: {
@@ -19,6 +22,7 @@ export default class ReelContainer {
                     yStart: 10,
                 },
                 sprites: [],
+                animation:0,
             },
             reel2: {
                 drawing: {
@@ -26,61 +30,325 @@ export default class ReelContainer {
                     yStart: 10,
                 },
                 sprites: [],
+                animation:0,
             },
         };
-        ReelContainer.winCombos = {
-            symbol4: {
-                reel0: "symbol4",
-                reel1: "symbol4",
-                reel2: "symbol4",
-                top: 2000,
-                mid: 1000,
-                bot: 4000,
+        ReelContainer.lineConfig = {
+            top:38,
+            mid:76,
+            bot:114,
+        };
+        /*winMap = {
+            reel0:{
+                reel1a:{
+                    reel2:{
+
+                    },
+                    reel2a:{
+
+                    }
+                },
+                reel1b:{
+                    reel2:{
+
+                    },
+                    reel2a:{
+
+                    }
+                }
+            }
+        }*/
+        ReelContainer.winMap = {
+            symbol4: {//CHERRY START
+                symbol4:{
+                    symbol4:{//3 CHERRY
+                        winId:'cherry',
+                        top: 2000,
+                        mid: 1000,
+                        bot: 4000,
+                    },
+                    symbol3:{//CHERRY & SEVEN COMBO
+                        winId:'cherrySeven',
+                        top:75,
+                        middle:75,
+                        bot:75
+                    }
+                },
+                symbol3:{
+                    winId:'cherrySeven',
+                    top:75,
+                    mid:75,
+                    bot:75,
+                    symbol4:{//CHERRY & SEVEN COMBO
+                        winId:'cherrySeven',
+                        top: 75,
+                        mid: 75,
+                        bot: 75,
+                    },
+                    symbol3:{//CHERRY & SEVEN COMBO
+                        winId:'cherrySeven',
+                        top:75,
+                        middle:75,
+                        bot:75
+                    }
+                },
             },
-            symbol3: {
-                reel0: "symbol3",
-                reel1: "symbol3",
-                reel2: "symbol3",
-                top: 150,
-                mid: 150,
-                bot: 150,
+            symbol3: {//SEVEN START
+                symbol3:{
+                    symbol4:{//CHERRY & SEVEN COMBO
+                        winId:'cherrySeven',
+                        top: 75,
+                        mid: 75,
+                        bot: 75,
+                    },
+                    symbol3:{//SEVEN COMBO
+                        winId:'3seven',
+                        top: 150,
+                        mid: 150,
+                        bot: 150,
+                    }
+                },
+                symbol4:{
+                    winId:'cherrySeven',
+                    top: 75,
+                    mid: 75,
+                    bot: 75,
+                    symbol4:{//CHERRY & SEVEN COMBO
+                        winId:'cherrySeven',
+                        top: 75,
+                        mid: 75,
+                        bot: 75,
+                    },
+                    symbol3:{//CHERRY & SEVEN COMBO
+                        winId:'cherrySeven',
+                        top: 75,
+                        mid: 75,
+                        bot: 75,
+                    }
+                },
             },
-            symbol0: {
-                reel0: "symbol0",
-                reel1: "symbol0",
-                reel2: "symbol0",
-                top: 50,
-                mid: 50,
-                bot: 50,
+            symbol0: {//3BAR
+                symbol0:{//3BARx2
+                    winId:'anyBar',
+                    top: 5,
+                    mid: 5,
+                    bot: 5,
+                    symbol0:{//3BAR COMBO
+                        winId:'3threeBar',
+                        top: 50,
+                        mid: 50,
+                        bot: 50,
+                    },
+                    symbol1:{//3BARx2 + BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol2:{//3BARx2 + 2BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                },
+                symbol1:{//3BAR + BAR
+                    winId:'anyBar',
+                    top: 5,
+                    mid: 5,
+                    bot: 5,
+                    symbol0:{//3BAR+ BAR + 3BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol1:{//3BAR + BAR+ BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol2:{//3BAR + BAR + 2BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                },
+                symbol2:{//3BAR + 2BAR
+                    winId:'anyBar',
+                    top: 5,
+                    mid: 5,
+                    bot: 5,
+                    symbol0:{//3BAR+2BAR + 3BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol1:{//3BAR + 2BAR +BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol2:{//3BAR + 2BAR + 2BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                }
             },
-            symbol2: {
-                reel0: "symbol2",
-                reel1: "symbol2",
-                reel2: "symbol2",
-                top: 20,
-                mid: 20,
-                bot: 20,
+            symbol2: {//2BAR
+                symbol2:{//2BARx2
+                    winId:'anyBar',
+                    top: 5,
+                    mid: 5,
+                    bot: 5,
+                    symbol2:{//2BAR COMBO
+                        winId:"3twoBar",
+                        top: 20,
+                        mid: 20,
+                        bot: 20,
+                    },
+                    symbol1:{//2BARx2 + BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol0:{//2BARx2 + 3BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                },
+                symbol1:{//2BAR + BAR
+                    winId:'anyBar',
+                    top: 5,
+                    mid: 5,
+                    bot: 5,
+                    symbol0:{//2BAR+ BAR + 3BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol1:{//2BAR + BAR+ BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol2:{//2BAR + BAR + 2BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                },
+                symbol0:{//2BAR + 3BAR
+                    winId:'anyBar',
+                    top: 5,
+                    mid: 5,
+                    bot: 5,
+                    symbol0:{//2BAR+3BAR + 3BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol1:{//2BAR + 3BAR +BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol2:{//2BAR + 3BAR + 2BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                }
             },
-            symbol1: {
-                reel0: "symbol1",
-                reel1: "symbol1",
-                reel2: "symbol1",
-                top: 10,
-                mid: 10,
-                bot: 10,
+            symbol1: {//BAR
+                symbol1:{//BARx2
+                    winId:'anyBar',
+                    top: 5,
+                    mid: 5,
+                    bot: 5,
+                    symbol1:{//BAR COMBO
+                        winId:'3oneBar',
+                        top: 10,
+                        mid: 10,
+                        bot: 10,
+                    },
+                    symbol2:{//BARx2 + 2BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol0:{//BARx2 + 3BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                },
+                symbol2:{//BAR + 2BAR
+                    winId:'anyBar',
+                    top: 5,
+                    mid: 5,
+                    bot: 5,
+                    symbol0:{//BAR+ 2BAR + 3BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol1:{//BAR + 2BAR+ BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol2:{//BAR + 2BAR + 2BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                },
+                symbol0:{//BAR + 3BAR
+                    winId:'anyBar',
+                    top: 5,
+                    mid: 5,
+                    bot: 5,
+                    symbol0:{//BAR+3BAR + 3BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol1:{//BAR + 3BAR +BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                    symbol2:{//BAR + 3BAR + 2BAR COMBO
+                        winId:'anyBar',
+                        top: 5,
+                        mid: 5,
+                        bot: 5,
+                    },
+                }
             },
-            //   symbol012: {
-            //     symbols: ["symbol0", "symbol1", "symbol2"],
-            //     top: 5,
-            //     mid: 5,
-            //     bot: 5,
-            //   },
-            //   symbol34: {
-            //     symbols: ["symbol3", "symbol4"],
-            //     top: 75,
-            //     mid: 75,
-            //     bot: 75,
-            //   },
         };
     }
 
@@ -95,8 +363,8 @@ export default class ReelContainer {
             "./assets/Cherry.png",
         ];
         Canvas.loadImage(bg, () => {
-            let bgSprite = Canvas.addSprite(bg);
-            Canvas.stageSprite(bgSprite, Canvas.app.stage);
+            let bgSprite = Canvas.addSprite(bg,StageManager.bgSprite);
+            Canvas.stageSprite(bgSprite, StageManager.stage);
             bgSprite.width = Canvas.app.renderer.view.width;
             bgSprite.height = Canvas.app.renderer.view.height;
             Canvas.loadImage(assets, ReelContainer.createReels);
@@ -109,7 +377,7 @@ export default class ReelContainer {
             let rC = Canvas.createContainer();
             rC.x = ReelContainer.reelConfig[reel].drawing.xStart;
             symbols.forEach((symbol) => {
-                ReelContainer.reelConfig[reel].sprites.push(Canvas.addSprite(symbol));
+                ReelContainer.reelConfig[reel].sprites.push(Canvas.addSprite(symbol,StageManager.spriteList));
             });
 
             ReelContainer.reelConfig[reel].sprites.forEach((sprite) => {
@@ -126,6 +394,11 @@ export default class ReelContainer {
     }
 
     static spinReels(results) {
+        for (let i = 0; i < ReelContainer.winLines.length; i++) {
+            const element = ReelContainer.winLines[i];
+            Canvas.removeSprite(element,Canvas.app.stage);
+        }
+        ReelContainer.winLines=[];
         if(results){
             ReelContainer.reels.forEach((reel) => {
               reel.spin(results[reel.id].pos, results[reel.id].symbol);
@@ -138,60 +411,71 @@ export default class ReelContainer {
     }
 
     static stopReels() {
+        let counter = 0;
         ReelContainer.reels.forEach((reel) => {
-            reel.stop();
+            setTimeout(() => {
+                reel.stop();
+            }, 500*counter);
+            counter++;
         });
         return ReelContainer.checkWin();
     }
 
-    static checkRowWin(row) {
-        let hasWin = true;
-        let startSymbol = row[0];
+    static checkRowWin(row,rowName) {
+        let map=this.winMap;
+        let win = {
+            value:0,
+            id:''
+        };
+        let winLine;
         for (let i = 0; i < row.length; i++) {
             const symbol = row[i];
-            if (
-                startSymbol === "empty" ||
-                symbol !== this.winCombos[startSymbol]["reel" + i]
-            ) {
-                hasWin = false;
+            if(map[symbol]){
+                map=map[symbol];
+            }else{
+                break;
             }
         }
-        return hasWin;
+        if(map[rowName]){
+            winLine = Canvas.drawLine(ReelContainer.lineConfig[rowName]);
+            ReelContainer.winLines.push(winLine);
+            Canvas.stageSprite(winLine,Canvas.app.stage);
+            win.value= map[rowName];
+            if(map.winId==="cherry"){
+                win.id = map.winId + rowName;
+            }else{
+                win.id = map.winId;
+            }
+        }
+        return win;
     }
 
     static checkWin() {
-        let rowWins = {
-            topRow: true,
-            midRow: true,
-            botRow: true,
-        };
-
         let topRow = [];
         let midRow = [];
         let botRow = [];
+        let topWin = 0;
+        let midWin = 0;
+        let botWin = 0;
+        let totalWinObj={
+            value:0,
+            idList:[]
+        };
 
         ReelContainer.reels.forEach((reel) => {
             topRow.push(reel.landing.top);
             midRow.push(reel.landing.mid);
             botRow.push(reel.landing.bot);
         });
-        let topWin = this.checkRowWin(topRow);
-        let midWin = this.checkRowWin(midRow);
-        let botWin = this.checkRowWin(botRow);
-        if (topWin || midWin || botWin) {
-            console.log("YOU WIN");
-            return true;
-        } else {
-            console.log("Sorry bud");
-            return false;
+
+        topWin = this.checkRowWin(topRow,'top');
+        midWin = this.checkRowWin(midRow,'mid');
+        botWin = this.checkRowWin(botRow,'bot');
+
+        if (topWin.value>0 || midWin.value>0 || botWin.value>0) {
+            totalWinObj.value = topWin.value + midWin.value + botWin.value;
+            totalWinObj.idList.push(topWin.id,midWin.id,botWin.id);
         }
+        return totalWinObj;
     }
-    // wait 3 seconds
-    // static stopReels(){
-    //     ReelContainer.reels.forEach(reel =>{
-    //         reel.stop();
-    //     });
-    //     console.table(ReelContainer.reels);
-    //     return [];
-    // }
 }

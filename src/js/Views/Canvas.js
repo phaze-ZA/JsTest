@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import { StageManager } from '../Models/Stage';
 
 export default class Canvas{
     static init(){
@@ -13,9 +14,14 @@ export default class Canvas{
         // window.addEventListener("resize",()=>{
         //     Canvas.app.renderer.resize(window.innerWidth, window.innerHeight*0.5);
         // });
+        StageManager.stage = Canvas.app.stage;
         document.getElementById('reelContainer').appendChild(Canvas.app.view);
         Canvas.app.renderer.backgroundColor="0xFFFFFF";
-        Canvas.spriteList=[];
+        Canvas.animationFrame = {
+            reel0:"",
+            reel1:"",
+            reel2:"",
+        };
     }
 
     static loadImage(images,callback){
@@ -32,11 +38,22 @@ export default class Canvas{
         });
     }
 
-    static addSprite(image){
+    static drawLine(yPos){
+        var line = new PIXI.Graphics();
+        line.lineStyle(7,0xFF0000,0.9);
+        line.position.x = 0;
+        line.position.y = yPos;
+        line.moveTo(0,yPos);
+        line.lineTo(500,yPos);
+        return line;
+    }
+
+    static addSprite(image,spriteList){
         let sprite =  new PIXI.Sprite(Canvas.app.loader.resources[image].texture);
-        Canvas.spriteList.push(sprite);
+        spriteList.push(sprite);
         return sprite;
     }
+
 
     static createContainer(){
         let container = new PIXI.Container();
@@ -47,6 +64,10 @@ export default class Canvas{
     static stageSprite(sprite,container){
         container.addChild(sprite);
         container.visible = true;
+    }
+
+    static removeSprite(sprite,container){
+        container.removeChild(sprite);
     }
 
     static drawImg(img,x,y,w,h){

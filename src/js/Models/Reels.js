@@ -1,7 +1,9 @@
+import Canvas from '../Views/Canvas';
 export default class Reel {
     constructor(id, symbols) {
         this.id = id;
         this.symbols = symbols;
+        this.animateReel = this.animateReel.bind(this);
         this.reelPosConfig = [
             'symbol0',
             'empty',
@@ -40,7 +42,24 @@ export default class Reel {
         }
         return symbolMap;
     }
+    animateReel(){
+        this.animationFrame = requestAnimationFrame(this.animateReel);
+        this.symbols.forEach(sprite=>{
+            if(sprite.y<300){
+                sprite.y+=50;
+            }else{
+                sprite.y=0;
+            }
+        });
+        Canvas.app.renderer.render(Canvas.app.stage);
+    }
+    stopAnimation(){
+        cancelAnimationFrame(this.animationFrame);
+    }
     setSymbols() {
+        this.symbols.forEach((symbol) => {
+            symbol.visible = false;
+        });
         if (this.landing.mid === "empty") {
             this.symbolMap[this.display.top].y = this.possiblePositions.topRow;
             this.symbolMap[this.display.top].visible = true;
@@ -56,10 +75,8 @@ export default class Reel {
         }
     }
     spin(pos,symbol) {
+        this.animateReel();
         let landingIdx = 0;
-        this.symbols.forEach((symbol) => {
-            symbol.visible = false;
-        });
         if(pos && symbol){
             if (pos === "top") {
               landingIdx =
@@ -76,7 +93,6 @@ export default class Reel {
                 this.reelPosConfig.length) %
                 this.reelPosConfig.length;
             }
-            
         }else
         {
             landingIdx = Math.floor(Math.random() * 9);
@@ -108,6 +124,7 @@ export default class Reel {
     }
 
     stop() {
+        this.stopAnimation();
         this.setSymbols();
     }
 }

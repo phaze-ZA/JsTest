@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <title>SLOT GAME</title>
 </head>
+
 <body>
     <div id="gameContainer">
         <header class="gameHeader">
@@ -17,106 +19,106 @@
                         <th id="symbol">Symbol</th>
                         <th id="value">Payout</th>
                     </thead>
-                    <tbody>
-                    <tr id="cherryTop">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            CHERRY - TOP LINE
-                        </td>
-                        <td>
-                            2000
-                        </td>
-                    </tr>
-                    <tr id="cherryMid">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            CHERRY - MIDDLE LINE
-                        </td>
-                        <td>
-                            1000
-                        </td>
-                    </tr>
-                    <tr id="cherryBottom">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            CHERRY - BOTTOM LINE
-                        </td>
-                        <td>
-                            4000
-                        </td>
-                    </tr>
-                    <tr id="3seven">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            SEVEN - TOP, MIDDLE OR BOTTOM LINE
-                        </td>
-                        <td>
-                            150
-                        </td>
-                    </tr>
-                    <tr id="cherrySeven">
-                        <td>
-                            ANY
-                        </td>
-                        <td>
-                            CHERRY & SEVEN TOP, MIDDLE OR BOTTOM LINE
-                        </td>
-                        <td>
-                            75
-                        </td>
-                    </tr>
-                    <tr id="3threeBar">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            3xBAR TOP, MIDDLE OR BOTTOM LINE
-                        </td>
-                        <td>
-                            50
-                        </td>
-                    </tr>
-                    <tr id="3twoBar">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            2xBAR TOP, MIDDLE OR BOTTOM LINE
-                        </td>
-                        <td>
-                            20
-                        </td>
-                    </tr>
-                    <tr id="3oneBar">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            BAR symbols TOP, MIDDLE OR BOTTOM LINE
-                        </td>
-                        <td>
-                            10
-                        </td>
-                    </tr>
-                    <tr id="anyBar">
-                        <td>
-                            ANY
-                        </td>
-                        <td>
-                            BAR symbols TOP, MIDDLE OR BOTTOM LINE
-                        </td>
-                        <td>
-                            5
-                        </td>
-                    </tr>
+                    <tbody id="payoutBody">
+                        <tr id="cherrytop">
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                CHERRY - TOP LINE
+                            </td>
+                            <td>
+                                2000
+                            </td>
+                        </tr>
+                        <tr id="cherrymid">
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                CHERRY - MIDDLE LINE
+                            </td>
+                            <td>
+                                1000
+                            </td>
+                        </tr>
+                        <tr id="cherrybot">
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                CHERRY - BOTTOM LINE
+                            </td>
+                            <td>
+                                4000
+                            </td>
+                        </tr>
+                        <tr id="3seven">
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                SEVEN - TOP, MIDDLE OR BOTTOM LINE
+                            </td>
+                            <td>
+                                150
+                            </td>
+                        </tr>
+                        <tr id="cherrySeven">
+                            <td>
+                                ANY
+                            </td>
+                            <td>
+                                CHERRY & SEVEN TOP, MIDDLE OR BOTTOM LINE
+                            </td>
+                            <td>
+                                75
+                            </td>
+                        </tr>
+                        <tr id="3threeBar">
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                3xBAR TOP, MIDDLE OR BOTTOM LINE
+                            </td>
+                            <td>
+                                50
+                            </td>
+                        </tr>
+                        <tr id="3twoBar">
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                2xBAR TOP, MIDDLE OR BOTTOM LINE
+                            </td>
+                            <td>
+                                20
+                            </td>
+                        </tr>
+                        <tr id="3oneBar">
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                BAR symbols TOP, MIDDLE OR BOTTOM LINE
+                            </td>
+                            <td>
+                                10
+                            </td>
+                        </tr>
+                        <tr id="anyBar">
+                            <td>
+                                ANY
+                            </td>
+                            <td>
+                                BAR symbol COMBO TOP, MIDDLE OR BOTTOM LINE
+                            </td>
+                            <td>
+                                5
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -136,7 +138,7 @@
                         <option value="symbol3">SEVEN</option>
                         <option value="symbol4">CHERRY</option>
                     </select>
-                    
+
                     <select name="reel0Pos" disabled="true" id="reel0Pos">
                         <option value="top">TOP</option>
                         <option value="mid">MIDDLE</option>
@@ -152,7 +154,7 @@
                         <option value="symbol3">SEVEN</option>
                         <option value="symbol4">CHERRY</option>
                     </select>
-                    
+
                     <select name="reel1Pos" disabled="true" id="reel1Pos">
                         <option value="top">TOP</option>
                         <option value="mid">MIDDLE</option>
@@ -168,7 +170,7 @@
                         <option value="symbol3">SEVEN</option>
                         <option value="symbol4">CHERRY</option>
                     </select>
-                    
+
                     <select name="reel2Pos" disabled="true" id="reel2Pos">
                         <option value="top">TOP</option>
                         <option value="mid">MIDDLE</option>
@@ -185,22 +187,21 @@
             </div>
             <div id="balanceBox" class="consoleBtn">
                 <span id="balanceHdr" class="header">Balance</span>
-                <input id="balanceTxt" type="number" readonly="true" class="txtVal"/>
+                <input id="balanceTxt" type="number" readonly="true" class="txtVal" />
             </div>
             <div id="winBox" class="consoleBtn">
                 <span id="winHdr" class="header">Win</span>
-                <span id="winTxt"  class="txtVal">0</span>
+                <span id="winTxt" class="txtVal">0</span>
             </div>
             <button id="spinBtn" class="consoleBtn">
                 SPIN
             </button>
             <div id="betBox" class="consoleBtn">
                 <span id="betHdr" class="header">Bet</span>
-                <span id="betTxt"  class="txtVal">1</span>
+                <span id="betTxt" class="txtVal">1</span>
             </div>
         </footer>
     </div>
-    <div id="debugArea">
-    </div>
 </body>
+
 </html>

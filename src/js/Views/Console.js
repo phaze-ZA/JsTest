@@ -56,7 +56,12 @@ export default class Console {
     }
 
     static onSpin() {
+        let payoutBody = document.getElementById('payoutBody');
         if (PlayerManager.canPlayerSpin()) {
+            for(var i=0;i<payoutBody.children.length;i++){
+                payoutBody.children[i].style.backgroundColor = "#0c0c0c";
+            }
+            Console.winTxt.innerText = 0;
             PlayerManager.balance--;
             Console.spinBtn.disabled = true;
             Console.setBalance(PlayerManager.balance);
@@ -86,10 +91,18 @@ export default class Console {
     }
 
     static onStop() {
+        let winObj = ReelContainer.stopReels();
         Console.spinBtn.disabled = false;
-        if (ReelContainer.stopReels() === true) {
-            Console.setWin(50);
-            Console.setBalance(PlayerManager.balance);
+        Console.setWin(winObj.value);
+        Console.setBalance(PlayerManager.balance);
+
+        for (let i = 0; i < winObj.idList.length; i++) {
+            const winId = winObj.idList[i];
+            if(winId!==''){
+                let winElement = document.getElementById(winId);
+                winElement.style.backgroundColor = "#7b7b7b";    
+            } 
         }
+
     }
 }
