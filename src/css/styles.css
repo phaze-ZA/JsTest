@@ -48,7 +48,8 @@ body{
     height: unset;
     position: absolute;
     right: 0;
-    width: 14%;
+    width: 14%;    
+    min-width: 204px;
 }
 
 /* Console Section*/
